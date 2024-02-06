@@ -24,8 +24,10 @@ RUN apt update \
         intl \
         pcntl \
         zip \
+        unzip \
         amqp \
         apcu \
+        tree \
     && cp $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini \
     && curl -fsSL -o /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar \
     && chmod +x /usr/local/bin/composer \
@@ -34,7 +36,7 @@ RUN apt update \
     && sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashrc \
     && sed -i "/# some more ls aliases/aalias ll='ls -lh'\nalias la='ls -A'\nalias l='ls -CF'" /etc/skel/.bashrc \
     && cp -f /etc/skel/.bashrc /root/.bashrc \
-    && useradd -m -u 1000 jin \
+    && useradd -m -s /bin/bash -u 1000 jin \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
